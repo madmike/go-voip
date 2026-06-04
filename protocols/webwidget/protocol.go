@@ -68,12 +68,6 @@ func (p *Protocol) HTTPHandler() core.HTTPHandler {
 	return &webhookHandler{protocol: p}
 }
 
-func (p *Protocol) findCall(id string) *webwidgetCall {
-	p.mu.RLock()
-	defer p.mu.RUnlock()
-	return p.calls[id]
-}
-
 func resolveLogger(l any) telemetry.Logger {
 	if logger, ok := l.(telemetry.Logger); ok {
 		return logger

@@ -3,8 +3,8 @@ package webwidget
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"io"
+	"log/slog"
 	"sync"
 	"time"
 
@@ -106,7 +106,7 @@ func (s *audioStream) readLoop() {
 				Timestamp: time.Now(),
 			}:
 			default:
-				fmt.Printf("[webwidget] WARNING: Receive buffer full, dropping packet\n")
+				slog.Warn("receive buffer full, dropping packet")
 			}
 		} else if msgType == websocket.TextMessage {
 			// Support JSON for signaling/control messages
